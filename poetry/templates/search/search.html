@@ -30,8 +30,13 @@
                 </thead>
                 {% for result in page.object_list %}
                 <tr>
-                    <td>{{ result.object.author }}</td>
-                    <td><a href="{% url 'corpus:markup' pk=result.object.markups.all.0.pk %}">{{ result.object.get_name }}</a></td>
+                    {% if result.object.poem %}
+                        <td>{{ result.object.poem.author }}</td>
+                        <td><a href="{% url 'corpus:markup' pk=result.object.poem.markups.all.0.pk %}">{{ result.object.poem.get_name }}</a></td>
+                    {% else %}
+                        <td>{{ result.object.author }}</td>
+                        <td><a href="{% url 'corpus:markup' pk=result.object.markups.all.0.pk %}">{{ result.object.get_name }}</a></td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </table>

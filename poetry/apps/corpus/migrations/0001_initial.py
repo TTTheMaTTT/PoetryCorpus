@@ -45,6 +45,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField(blank=True, default='', verbose_name='Слоговая разметка по ударениям')),
                 ('author', models.CharField(max_length=50, verbose_name='Автор разметки')),
+                ('metre', models.CharField(max_length=50, verbose_name='Стихотворный размер')),
                 ('additional', models.TextField(blank=True, verbose_name='Дополнительная ифнормация')),
             ],
             options={

@@ -17,6 +17,17 @@ ZALYZNYAK_DICT = "./data/dict/zaliznyak.txt"
 TRIE_PATH = "./data/dict/stress.trie"
 RAW_DICT_PATH = "./data/dict/stress_raw_dict.txt"
 
+def Count_Poem_Feets(markup):
+    """Подсчёт стопности стихотворения, используя его разметку"""
+    res=0
+
+    for line in markup.lines:
+        for word in line.words:
+            for syllable in word.syllables:
+                if syllable.stress!=-1:
+                    res+=1
+
+    return str(round(res/len(markup.lines)))
 
 class Command(BaseCommand):
     help = 'Automatic markup dump'
@@ -91,8 +102,8 @@ class Command(BaseCommand):
                 if raw_writer is not None:
                     raw_writer.write_markup(markup)
                 if db:
-                    ModelMarkup.objects.create(poem=p, text=markup.to_json(),
-                                               author="Automatic2", additional=result.to_json(),
+                    ModelMarkup.objects.create(poem=p, text=markup.to_json(),author="Automatic2", metre=result.metre,
+                                               feet_count="4",additional=result.to_json(),
                                                markup_version=markup_version)
             else:
                 markup = p.markups.filter(author=author)[0]

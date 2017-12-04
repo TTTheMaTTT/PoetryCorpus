@@ -116,6 +116,8 @@ class Markup(Model):
     poem = ForeignKey(Poem, related_name="markups")
     text = TextField("Слоговая разметка по ударениям", blank=True, default="")
     author = CharField("Автор разметки", max_length=50, blank=False)
+    metre = CharField("Размер", max_length=50, blank=False)
+    feet_count = CharField("Стопность стихотворения", max_length=4, blank=False)
     additional = TextField("Дополнительная ифнормация", blank=True)
     markup_version = ForeignKey(MarkupVersion, related_name="markups")
 
